@@ -7,6 +7,11 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.DS_Store
+dbdumps
 
 # Coverage directory used by tools like istanbul
 coverage
+
+# Environment config
+.env

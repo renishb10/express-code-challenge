@@ -4,9 +4,10 @@
   "description": "A coding challenge to assess your ability to navigate an express server implementation.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "author": "",
+  "author": "Renish Bhaskaran - http://renishb.in",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
