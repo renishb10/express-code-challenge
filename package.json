@@ -7,7 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint .",
-    "test": "mocha tests/**/*.js --exit"
+    "test": "mocha tests/**/*.js --exit",
+    "coverage": "nyc --reporter html --reporter text npm test"
   },
   "author": "Renish Bhaskaran - http://renishb.in",
   "keywords": [
@@ -36,6 +37,7 @@
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
     "supertest": "^4.0.2"
   }
 }
