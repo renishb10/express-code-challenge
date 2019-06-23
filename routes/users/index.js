@@ -30,8 +30,11 @@ router.post('/create', async (req, res, next) => {
 
               // Create new user
               User.create({ ...req.body, InstitutionId: userInstitute.id })
-                .then(data => {
-                  res.jsend.success(data);
+                .then(result => {
+                  // Masking password - delete operator not working due to inheritence
+                  result['password'] = 'xxxxxxxxxxxxxxxx';
+
+                  res.jsend.success(result);
                 })
                 .catch(err => {
                   res.status(400).jsend.error(err.message);

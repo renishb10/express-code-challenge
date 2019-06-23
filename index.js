@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 const jsend = require('jsend');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 // Custom dependencies
 const config = require('./config');
@@ -31,6 +33,13 @@ app.use(
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   }),
+);
+
+// Swagger Documentation
+app.use(
+  '/api-doc',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, { explorer: true }),
 );
 
 // Authentication
