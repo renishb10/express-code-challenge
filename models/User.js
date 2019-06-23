@@ -14,11 +14,6 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: {
             msg: 'Please provide a valid Email address',
           },
-          len: {
-            args: [6, 255],
-            msg:
-              'Please provide a Email address with at least 6 chars but not more than 255',
-          },
         },
       },
       password: {
@@ -26,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notEmpty: true,
+          len: {
+            args: [6, 100],
+            msg: 'Password must be with at least 6 chars but not more than 100',
+          },
         },
       },
       name: {
@@ -34,8 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: {
             args: [2, 50],
-            msg:
-              'Please provide a Name with at least 2 chars but not more than 50',
+            msg: 'Name must be with at least 2 chars but not more than 50',
           },
         },
       },
@@ -46,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
           isIn: {
             args: [['student', 'academic', 'administrator']],
             msg:
-              'Please provide a Role of any these types "student", "academic", "administrator"',
+              'Role must be of these types "student", "academic", "administrator"',
           },
         },
       },
@@ -67,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
 
-  // Encrypt the password
+  // Hashing the password
   User.comparePassword = (encodedPassword, password) => {
     return bcrypt.compareSync(password, encodedPassword);
   };

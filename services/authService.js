@@ -1,11 +1,13 @@
+// Dependencies
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
 
 // Custom dependencies
 const { User } = require('../models');
+const config = require('../config');
 
 const jwtOptions = {
-  secretOrKey: 'secretofbibliotech' + '878ad68e43a8405d968cac861e7f6030',
+  secretOrKey: config.auth.jwtKey,
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
@@ -26,11 +28,16 @@ const jwtStrategy = new Strategy(jwtOptions, (payload, cb) => {
 
 passport.use(jwtStrategy);
 
+// Wrappers
+const initialize = () => {
+  return passport.initialize();
+};
+
+const authenticate = () => {
+  return passport.authenticate('jwt', { session: false });
+};
+
 module.exports = {
-  initialize: () => {
-    return passport.initialize();
-  },
-  authenticate: () => {
-    return passport.authenticate('jwt', { session: false });
-  },
+  initialize,
+  authenticate,
 };

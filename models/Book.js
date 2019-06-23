@@ -4,13 +4,17 @@ module.exports = (sequelize, DataTypes) => {
     'Book',
     {
       isbn: {
+        // There are two types (ISBN-10 & ISBN-13)
+        // We should decide - either store just numbers or with dashes
+        // TODO: Business logic that converts 10 to 13 by adding "978"
+        // TODO: Robust validation for ISBN, since this is crucial piece for the app
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
           len: {
             args: [10, 13],
-            msg: 'ISBN should be 10 digits or 13 digits',
+            msg: 'ISBN must be 10 digits or 13 digits',
           },
         },
       },
@@ -21,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
           len: {
             args: [2, 200],
             msg:
-              'Please provide a Book Title with at least 2 chars but not more than 200',
+              'Book Title must be with at least 2 chars but not more than 200',
           },
         },
       },
@@ -32,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
           len: {
             args: [2, 100],
             msg:
-              'Please provide a Author Name with at least 2 chars but not more than 100',
+              'Book Author Name must be with at least 2 chars but not more than 100',
           },
         },
       },

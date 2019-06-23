@@ -26,6 +26,10 @@ const config = {
     type: process.env.DB_TYPE,
     ssl: process.env.DB_SSL == 'true' ? true : false,
   },
+  auth: {
+    jwtKey: process.env.JWT_SECRET,
+    jwtExpiresIn: process.env.JWT_EXPIRES_IN,
+  },
 };
 
 module.exports = config;

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
           len: {
             args: [2, 100],
             msg:
-              'Please provide a Name with at least 2 chars but not more than 100',
+              'Institution Name must be with at least 2 chars but not more than 100',
           },
         },
       },
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
           len: {
             args: [4, 100],
             msg:
-              'Please provide a Email Domain with at least 4 chars but not more than 100',
+              'Institution Email Domain must be with at least 4 chars but not more than 100',
           },
         },
       },
