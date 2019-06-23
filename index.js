@@ -3,15 +3,15 @@
 // Module dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
+const jsend = require('jsend');
 
 // Custom dependencies
 const config = require('./config');
 const logger = require('./helpers/logger');
 const routes = require('./routes');
-const db = require('./data/db');
+const auth = require('./services/authService');
 
 // Express app initiate
 const app = express();
@@ -23,29 +23,30 @@ global.logger = logger;
 app.use(helmet()); // Adds security headers
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(jsend.middleware);
 
-// Routing middlewares
+// Security middlewares
+app.use(
+  cors({
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }),
+);
+
+// Authentication
+app.use(auth.initialize());
+
+// Routing
 app.use('/', routes.index);
-
-// To relevant routes
 app.use(`${config.base_url_path.v1}users`, routes.users);
 app.use(`${config.base_url_path.v1}books`, routes.books);
-app.use(`${config.base_url_path.v1}institutions`, routes.institutions);
 
-// Initiate DB and run the server
-db.sync({
-  // Be cautious, setting true will clean up your db
-  force: false,
-})
-  .then(() => {
-    app.listen(process.env.PORT || config.port, () => {
-      logger.info(`Listening on port ${process.env.PORT || config.port}`);
-    });
-  })
-  .catch(e => {
-    logger.error(e.message);
-  });
+app.listen(process.env.PORT || config.port, () => {
+  logger.info(`Listening on port ${process.env.PORT || config.port}`);
+});
 
-// Exporting it for Chai test
+// Exporting it for unit test
 module.exports = app;
+
+// TODO: Add module 'express-load' to chain-up & load middlewares, routes, services etc later
+// TODO: Add third party log store via winston & exceptions (eg: Rollbar, Sentry.io or Azure AppInsights)

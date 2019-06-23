@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "mocha tests/**/*.js --exit",
+    "coverage": "nyc --reporter html --reporter text npm test",
+    "seed": "node ./seed"
   },
   "author": "Renish Bhaskaran - http://renishb.in",
   "keywords": [
@@ -18,20 +21,27 @@
   "license": "ISC",
   "dependencies": {
     "argv-parser": "^0.1.4",
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "helmet": "^3.18.0",
     "jsend": "^1.0.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "pg": "^7.11.0",
     "sequelize": "^5.8.12",
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^6.0.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-prettier": "^3.1.0"
+    "eslint-plugin-prettier": "^3.1.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "supertest": "^4.0.2"
   }
 }
