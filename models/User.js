@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      institutionId: {
+      InstitutionId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -68,7 +68,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // Encrypt the password
-  User.isPassword = (encodedPassword, password) => {
+  User.comparePassword = (encodedPassword, password) => {
     return bcrypt.compareSync(password, encodedPassword);
   };
 

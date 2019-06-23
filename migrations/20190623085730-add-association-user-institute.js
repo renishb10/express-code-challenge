@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     // Reference Link
     // https://medium.com/@andrewoons/how-to-define-sequelize-associations-using-migrations-de4333bf75a7
-    return queryInterface.addColumn('Users', 'institutionId', {
+    return queryInterface.addColumn('Users', 'InstitutionId', {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
@@ -17,6 +17,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn('Users', 'institutionId');
+    return queryInterface.removeColumn('Users', 'InstitutionId');
   },
 };

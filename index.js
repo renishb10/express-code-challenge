@@ -12,7 +12,7 @@ const jsend = require('jsend');
 const config = require('./config');
 const logger = require('./helpers/logger');
 const routes = require('./routes');
-const db = require('./data/db');
+const auth = require('./services/authService');
 
 // Express app initiate
 const app = express();
@@ -26,6 +26,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(jsend.middleware);
+
+// Authentication
+app.use(auth.initialize());
 
 // Routing middlewares
 app.use('/', routes.index);

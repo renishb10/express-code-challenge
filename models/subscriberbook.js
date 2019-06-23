@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const SubscriberBook = sequelize.define(
     'SubscriberBook',
     {
-      bookId: DataTypes.STRING,
-      institutionId: DataTypes.STRING,
+      BookId: DataTypes.STRING,
+      InstitutionId: DataTypes.STRING,
     },
     {},
   );
