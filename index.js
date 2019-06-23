@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
+const jsend = require('jsend');
 
 // Custom dependencies
 const config = require('./config');
@@ -24,6 +25,7 @@ app.use(helmet()); // Adds security headers
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(jsend.middleware);
 
 // Routing middlewares
 app.use('/', routes.index);
