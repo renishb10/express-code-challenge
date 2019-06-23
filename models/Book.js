@@ -4,13 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     'Book',
     {
       isbn: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
           len: {
             args: [10, 13],
-            msg: 'ISBN number should be 10 digits or 13 digits',
+            msg: 'ISBN should be 10 digits or 13 digits',
           },
         },
       },
