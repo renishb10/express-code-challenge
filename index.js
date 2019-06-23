@@ -33,19 +33,9 @@ app.use(`${config.base_url_path.v1}users`, routes.users);
 app.use(`${config.base_url_path.v1}books`, routes.books);
 app.use(`${config.base_url_path.v1}institutions`, routes.institutions);
 
-// Initiate DB and run the server
-db.sync({
-  // Be cautious, setting true will clean up your db
-  force: false,
-})
-  .then(() => {
-    app.listen(process.env.PORT || config.port, () => {
-      logger.info(`Listening on port ${process.env.PORT || config.port}`);
-    });
-  })
-  .catch(e => {
-    logger.error(e.message);
-  });
+app.listen(process.env.PORT || config.port, () => {
+  logger.info(`Listening on port ${process.env.PORT || config.port}`);
+});
 
 // Exporting it for Chai test
 module.exports = app;

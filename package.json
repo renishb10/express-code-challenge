@@ -8,7 +8,8 @@
     "dev": "nodemon index.js",
     "lint": "eslint .",
     "test": "mocha tests/**/*.js --exit",
-    "coverage": "nyc --reporter html --reporter text npm test"
+    "coverage": "nyc --reporter html --reporter text npm test",
+    "seed": "node ./seed"
   },
   "author": "Renish Bhaskaran - http://renishb.in",
   "keywords": [
@@ -26,6 +27,7 @@
     "express": "^4.16.4",
     "helmet": "^3.18.0",
     "jsend": "^1.0.2",
+    "password-hash": "^1.2.2",
     "pg": "^7.11.0",
     "sequelize": "^5.8.12",
     "winston": "^3.2.1"
