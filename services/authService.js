@@ -16,7 +16,7 @@ const jwtStrategy = new Strategy(jwtOptions, (payload, cb) => {
         return cb(null, {
           id: user.id,
           email: user.email,
-          insitutionId: user.insitutionId,
+          InstitutionId: user.InstitutionId,
         });
       }
       return cb(null, false);

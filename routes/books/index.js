@@ -1,17 +1,22 @@
 // Dependencies
 const router = require('express').Router();
 
-// Models
-const models = require('../../models');
+// Custom Dependencies
+const { Book, Institution } = require('../../models');
+const auth = require('../../services/authService');
 
 ///////////////////////////////////////////////////////////////
 /// GET all books
 ///////////////////////////////////////////////////////////////
-router.get('/', async (req, res, next) => {
+router.get('/', auth.authenticate(), async (req, res, next) => {
   try {
-    models.Book.findAll({})
+    Book.findAll({})
       .then(data => {
-        return res.jsend.success(data);
+        Institution.findOne({ where: { id: 1 } }).then(ins => {
+          if (ins) {
+            ins.getBooks().then(books => res.jsend.success(books));
+          } else res.status(200).jsend([]);
+        });
       })
       .catch(err => {
         console.log(err);

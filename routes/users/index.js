@@ -3,7 +3,6 @@ const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 
 // Custom dependencies
-const auth = require('../../services/authService');
 const { User, Institution } = require('../../models');
 
 ///////////////////////////////////////////////////////////////
@@ -63,6 +62,9 @@ router.post('/signin', async (req, res, next) => {
                 InstitutionId: usr.InstitutionId,
               },
               'secretofbibliotech' + '878ad68e43a8405d968cac861e7f6030',
+              {
+                expiresIn: 86400,
+              },
             );
 
             res.jsend.success(token);
